@@ -109,6 +109,7 @@ ssh netid@keeling.earth.illinois.edu
 6) Start an interactive session on one of keeling’s compute nodes using the qlogin command
 ```
 qlogin -p node -n 4 -mem 72G -time 24:00:00
+
 ```
 
 This will request a compute session for 24 hours on 4 CPU cores and request 72 gigabytes of RAM.  If the resources are available, you will be logged into a session on one of keeling’s compute nodes, e.g., keeling-d04, keeling-d01, keeling-c01 etc
