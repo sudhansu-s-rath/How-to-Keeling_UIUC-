@@ -42,10 +42,27 @@ The installer should spit out terms and conditions. Hit enter until it asks for 
 
 If it complained that there is nothing named conda, something didnt work and we will have to debug. But if it is updating something type 'y' and update conda.
 8) If the last command worked, you will want to install all the packages you want. To do that follow the example here:
+ I suggest to crerate a separate virtual environment other than base environment and install all the required packages there
+ You can check the list of environment by:
+<pre><code> conda env list </pre></code>
+
+You can create a new environment by:
+<pre><code> conda create --name myenv </pre></code>
+
+NOTE: Replace myenv with the environment name.
+
+After creating the environment , you can activate it by:
+
+<pre><code> conda activate myenv </pre></code>
+
+After the created environment is active , we can install all the required packages one by one or all together:
+
+<pre><code> conda install matplotlib numpy xarray scipy netCDF4 jupyter </pre></code>
+
+or one by one like:
+ 
 <pre><code> conda install matplotlib </pre></code>
-
-Here is a list of other packages you will likely need. This will install the packages globally. It is often better to use a virtual environment when installing packages because it allows you to manage your Python packages for different projects. For example, one of your projects may require a different verison of a library than another. You can find resources for doing so at https://ncar.github.io/esds/faq/#conda-environments 
-
+or
 <pre><code>
 conda install scipy
 conda install netCDF4
@@ -53,6 +70,10 @@ conda install -c intel scikit-learn
 conda install jupyter
 conda install xarray
 </pre></code>
+
+
+Using a virtual environment when installing packages is often better because it allows you to manage your Python packages for different projects. For example, one of your projects may require a different verison of a library than another. You can find resources for doing so at https://ncar.github.io/esds/faq/#conda-environments 
+
 
 Congrats! You know have python on keeling! In order to get it running each time you log in to keeling you will **need** to envoke bash. Do this by doing step 6 above.
 
