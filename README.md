@@ -55,7 +55,7 @@ After creating the environment , you can activate it by:
 
 <pre><code> conda activate myenv </pre></code>
 
-After the created environment is active , we can install all the required packages one by one or all together:
+After the created environment is active, we can install all the required packages one by one or all together:
 
 <pre><code> conda install matplotlib numpy xarray scipy netCDF4 jupyter </pre></code>
 
@@ -101,8 +101,9 @@ ssh netid@keeling.earth.illinois.edu
 ### Setup your Jupyter Notebook on Keeling
 
 4) From a terminal window on MacOS, or a Windows PowerShell session on Windows 10, ssh to keeling
+5) Better to start with a 2 tab terminal and use the internal terminal comes with the OS.
 
-5) Start a bash session (to be able to run python):
+6) Start a bash session (to be able to run python):
 <pre><code> bash </code></pre>
 
 6) Start an interactive session on one of keeling’s compute nodes using the qlogin command
@@ -110,20 +111,29 @@ ssh netid@keeling.earth.illinois.edu
 qlogin -p node -n 4 -mem 72G -time 24:00:00
 ```
 
-This will request a compute session for 24 hours on 4 CPU cores and request 72 gigabytes of RAM.  If the resources are available, you will be logged into a session on one of keeling’s compute nodes, e.g., keeling-d04.
+This will request a compute session for 24 hours on 4 CPU cores and request 72 gigabytes of RAM.  If the resources are available, you will be logged into a session on one of keeling’s compute nodes, e.g., keeling-d04, keeling-d01, keeling-c01 etc
 
 *Note the machine name (i.e., keeling-d02) that you are logged into, you’ll need it for a later step.*
 
 7) Start Jupyter notebook using the following command:
-```
+
+8) ```
 jupyter notebook --port=XXXX --no-browser --ip=127.0.0.1
 ```
+```
+jupyter lab --port=8242 --no-browser --ip=127.0.0.1
+```
+jupyter lab is suggested instead of jupyter notebook for experiments while coding.
+
+Use a separate port number instead of 8242, 8242 is specific to my username.
 
 Replace XXXX with the port number you came up with above.  If there is an error regarding the port (i.e., it says that it is already used), then try a different one.  If successful, the command will display a link that you will need to connect to the Jupyter notebook in the next step
 
 *You will need the url it returns at the bottom of the terminal*
 
 ### Connect to your notebook using your local machine
+
+Do the Following in the second terminal tab:
 
 8) Using terminal or PowerShell, open a second ssh session to keeling, except now we will open an ssh tunnel to the compute node using the port that we used in the previous step.
 ```
@@ -134,12 +144,21 @@ You’ll have to replace
   * The port number from above in 4 places
   * Your netID in two places
   * The name of the remote machine (i.e., keeling-d02; see step 5 under Install Jupyter and Create Directory for more details)
+```
+ssh -L 8242:127.0.0.1:8242 sudhansu@keeling.earth.illinois.edu ssh -L 8242:127.0.0.1:8242 sudhansu@keeling-d02
+```
 
+Suggested by UIUC grad students: It mostly works if I am using the Illinoisnet, not VPN.
+
+```
+ssh -L 8242:127.0.0.1:8242 sudhansu@keeling.earth.illinois.edu -L 8242:127.0.0.1:8242 -N sudhansu@keeling-c02
+```
 Note that you may have to enter your password if you don’t have the ssh key for keeling stored on your local machine.  Warnings for RSA host keys are ok.
 
 This will set up an ssh tunnel from port xxxx (which is accessible from your web browser) to the Jupyter notebook server on keeling.  You will need to kill this ssh session (with Control-C) when you are finished, as you can’t connect again to this port without killing it explicitly.
 
 9) Now, point a web browser to the URL that you obtained in Step 1.  You should see a Jupyter notebook that displays locally, but executes code on keeling, and has access to keeling file systems.  Note that it will not have access to your local file systems (e.g., on your Mac or PC).
+10. Bookmark the link in your browser to open quickly.
 
 ### General Advice
 
@@ -156,15 +175,4 @@ This will set up an ssh tunnel from port xxxx (which is accessible from your web
 
 If you are interested in using Dask on Keeling, be sure to checkout the following [notebook](https://github.com/swnesbitt/dask-keeling/blob/master/using%20dask-distributed%20on%20keeling.ipynb)
 
----
 
-## Installing and Compiling WRF on Keeling
-If you are working with Weather Research and Forecasting (WRF) model simulations, You can check the lectures by Prof. Steve Nesbitt on mesoscale modeling [here](https://publish.illinois.edu/mesomodel/)
-
-## Official Keeling Documentation
-You should check out the [documentation provided by the UIUC Atmospheric Science staff](https://wiki.illinois.edu/wiki/pages/viewpage.action?spaceKey=manabecluster&title=keeling+Home) which includes the following:
-- Explanation of file structure
-- Tutorial on parallel computing using Keeling
-- Weather Research and Forecasting (WRF) model installation turorial
-
----
