@@ -20,7 +20,7 @@ continue! If you using a Windows machine, you can use [Putty](https://www.putty.
 
 ---
 
-## Installing
+## Installing and Setting up Python
 For installation of python on keeling we suggest using miniconda (https://docs.conda.io/en/latest/miniconda.html). This is a light version of anaconda and is less likely to give you problems later on.
 
 1) Log onto keeling as described above with your netID
