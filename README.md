@@ -106,7 +106,7 @@ ssh netid@keeling.earth.illinois.edu
 6) Start a bash session (to be able to run python):
 <pre><code> bash </code></pre>
 
-6) Start an interactive session on one of keeling’s compute nodes using the qlogin command
+7) Start an interactive session on one of keeling’s compute nodes using the qlogin command
 ```
 qlogin -p node -n 4 -mem 72G -time 24:00:00
 
@@ -116,13 +116,14 @@ This will request a compute session for 24 hours on 4 CPU cores and request 72 g
 
 *Note the machine name (i.e., keeling-d02) that you are logged into, you’ll need it for a later step.*
 
-7) Start Jupyter notebook using the following command:
-
-8) ```
+8) Start Jupyter notebook using the following command:
+```
 jupyter notebook --port=XXXX --no-browser --ip=127.0.0.1
+
 ```
 ```
 jupyter lab --port=8242 --no-browser --ip=127.0.0.1
+
 ```
 jupyter lab is suggested instead of jupyter notebook for experiments while coding.
 
@@ -139,20 +140,24 @@ Do the Following in the second terminal tab:
 8) Using terminal or PowerShell, open a second ssh session to keeling, except now we will open an ssh tunnel to the compute node using the port that we used in the previous step.
 ```
 ssh -L XXXX:127.0.0.1:XXXX netID@keeling.earth.illinois.edu ssh -L XXXX:127.0.0.1:XXXX netID@remotemachine
+
 ```
 
 You’ll have to replace
   * The port number from above in 4 places
   * Your netID in two places
   * The name of the remote machine (i.e., keeling-d02; see step 5 under Install Jupyter and Create Directory for more details)
+
 ```
 ssh -L 8242:127.0.0.1:8242 sudhansu@keeling.earth.illinois.edu ssh -L 8242:127.0.0.1:8242 sudhansu@keeling-d02
+
 ```
 
 Suggested by UIUC grad students: It mostly works if I am using the Illinoisnet, not VPN.
 
 ```
 ssh -L 8242:127.0.0.1:8242 sudhansu@keeling.earth.illinois.edu -L 8242:127.0.0.1:8242 -N sudhansu@keeling-c02
+
 ```
 Note that you may have to enter your password if you don’t have the ssh key for keeling stored on your local machine.  Warnings for RSA host keys are ok.
 
