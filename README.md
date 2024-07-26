@@ -166,6 +166,20 @@ This will set up an ssh tunnel from port xxxx (which is accessible from your web
 9) Now, point a web browser to the URL that you obtained in Step 1.  You should see a Jupyter notebook that displays locally, but executes code on keeling, and has access to keeling file systems.  Note that it will not have access to your local file systems (e.g., on your Mac or PC).
 10. Bookmark the link in your browser to open quickly.
 
+### Connect to the same Jupyter Notebook server from VS Code
+
+1) Copy the url generated above
+2) open VS code and ssh to your workspace in keeling
+3) Select kernel on your working notebook
+4) To select click on the top right corner
+   <img width="516" alt="image" src="https://github.com/user-attachments/assets/f54fd4d7-ce00-422e-b230-1393a55eb6db">
+
+5) Select Another Kernel
+6) Select Existing Jupyter Server
+7) Paste the copied URL and press enter
+8) Provide a name or enter again for the default name
+9) Now you are connected to the Jupyter server using qlogin in Keeling.
+
 ### General Advice
 
 - Consider replacing the ```jupyter notebook``` command to ```jupyter lab``` if you would like to try out a different notebook/file editing experience
